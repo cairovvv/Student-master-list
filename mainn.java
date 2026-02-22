@@ -17,47 +17,41 @@ public class Main1 {
             String choice = sc.nextLine();
 
             if (choice.equals("1")) {
+                // Collect all 10 attributes via Scanner
                 System.out.print("ID: "); int id = Integer.parseInt(sc.nextLine());
                 System.out.print("First Name: "); String fName = sc.nextLine();
                 System.out.print("Last Name: "); String lName = sc.nextLine();
                 System.out.print("Age: "); int age = Integer.parseInt(sc.nextLine());
                 System.out.print("Gender: "); String gen = sc.nextLine();
-                System.out.print("Year: "); int yr = Integer.parseInt(sc.nextLine());
+                System.out.print("Year Level: "); int yr = Integer.parseInt(sc.nextLine());
                 System.out.print("Course: "); String crs = sc.nextLine();
-                System.out.print("Blood: "); String bld = sc.nextLine();
+                System.out.print("Blood Type: "); String bld = sc.nextLine();
                 System.out.print("Address: "); String addr = sc.nextLine();
                 System.out.print("Contact: "); int con = Integer.parseInt(sc.nextLine());
 
-                // Storing data using Student Object
                 Student s = new Student(id, fName, lName, age, gen, yr, crs, bld, addr, con);
                 librarian.addStudent(s);
-                System.out.println("Student added successfully to database!");
+                System.out.println("Student saved successfully!");
 
             } else if (choice.equalsIgnoreCase("2") || choice.equalsIgnoreCase("SHOW")) {
                 List<Student> students = librarian.getAllStudents();
                 
-                // Professional Table Header
-                System.out.println("\n" + "=".repeat(115));
-                System.out.printf("%-5s | %-25s | %-5s | %-8s | %-8s | %-30s%n", 
-                                  "ID", "NAME", "AGE", "GEN", "COURSE", "ADDRESS");
-                System.out.println("-".repeat(115));
+                // Full Header for all 10 attributes
+                System.out.println("\n" + "=".repeat(160));
+                System.out.printf("%-5s | %-12s | %-12s | %-3s | %-7s | %-4s | %-8s | %-5s | %-25s | %-10s%n", 
+                                  "ID", "FIRST", "LAST", "AGE", "GENDER", "YEAR", "COURSE", "BLOOD", "ADDRESS", "CONTACT");
+                System.out.println("-".repeat(160));
 
                 for (Student s : students) {
-                    String fullName = s.getFirstName() + " " + s.getLastName();
-                    
-                    // Fixed-width formatting to keep columns clean
-                    System.out.printf("%-5d | %-25s | %-5d | %-8s | %-8s | %-30s%n",
-                        s.getID(), 
-                        fullName, 
-                        s.getAge(), 
-                        s.getGender(), 
-                        s.getCourse(), 
-                        s.getAddress());
+                    // Displaying exactly 10 fields per student
+                    System.out.printf("%-5d | %-12s | %-12s | %-3d | %-7s | %-4d | %-8s | %-5s | %-25s | %-10d%n",
+                        s.getID(), s.getFirstName(), s.getLastName(), s.getAge(), 
+                        s.getGender(), s.getYearLvl(), s.getCourse(), 
+                        s.getBloodtype(), s.getAddress(), s.getContact());
                 }
-                System.out.println("=".repeat(115));
+                System.out.println("=".repeat(160));
                 
             } else if (choice.equals("3")) {
-                System.out.println("Exiting system...");
                 break;
             }
         }
